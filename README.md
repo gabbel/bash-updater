@@ -36,3 +36,11 @@ The code is licensed under the GNU Public License, version 3.
 ## Contribution
 
 If you like to contribute useful changes to the script, simply fork the project, apply your changes and make a pull request.
+
+## Changes on this fork
+
+Support for IPv6 AAAA Records
+Support for IPv4 A Records
+Support for multiple hosts
+Filter for the default route interface if none has been specified.
+Filter for API return messages.
