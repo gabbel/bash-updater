@@ -39,8 +39,8 @@ If you like to contribute useful changes to the script, simply fork the project,
 
 ## Changes on this fork
 
-Support for IPv6 AAAA Records
-Support for IPv4 A Records
-Support for multiple hosts
-Filter for the default route interface if none has been specified.
-Filter for API return messages.
+- Support for IPv6 AAAA Records
+- Support for IPv4 A Records
+- Support for multiple hosts
+- Filter for the default route interface if none has been specified.
+- Filter for API return messages.
