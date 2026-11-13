@@ -41,6 +41,52 @@ If you like to contribute useful changes to the script, simply fork the project,
 
 - Support for IPv6 AAAA Records
 - Support for IPv4 A Records
-- Support for multiple hosts
+- Shortens IPv6 Address by default
+- Discovers IPv6 Address of a Target host.
+- Does not require dhcpv6, can also detect the SLAAC configured IPv6 Address of a Target host.
 - Filter for the default route interface if none has been specified.
 - Filter for API return messages.
+- Is gready with API calls, tracks changes of IP addresses over per host defined '/tmp/ydns_last_ip6_<host>' or '/tmp/ydns_last_ip4_<host>' file.
+- Works with BusyBox ash / POSIX sh. No Bash-specific features.
+
+## Requirements:
+
+- curl, awk, sort, sed, tr, grep, head, tail;
+- ip (for IPv6 and for -i); nslookup for -t
+
+```bash
+# Within openwrt normally only curl is an addtional required package.
+# Install from CLI using.
+apk add curl
+```
+
+## Usage Examples:
+
+```bash
+updater.sh -4 mylocalservice.domain.com         # WAN IPv4
+updater.sh -i tun0 -4 mylocalservice.domain.com # IPv4 of the VPN interface
+updater.sh -6 myrouter.domain.com               # IPv6 of the WAN interface
+updater.sh -I tun0 -6 myrouter.domain.com       # IPv6 of the VPN interface
+updater.sh -V                                   # Verbose mode.
+```
+- Recommended usage:
+
+Create a helper Script if you got Serval entries to keep track, trigger that one over your crontab.
+```bash
+#!/bin/ash
+
+# sound.mydomain.net
+/etc/updater.sh -4 sound.mydomain.net -6 sound.mydomain.net -t s2.lan
+# nextcloud.mydomain.net
+/etc/updater.sh -4 nextcloud.mydomain.net -6 nextcloud.mydomain.net -t s3.lan
+
+exit 0
+```
+
+## Complex Example:
+```bash
+updater.sh -i wan.10 \                          # IPv4 of interface wan.10 (wan on vlan10)
+           -4 mylocalservice.domain.com \       # Use to update this IPv4 entry within ydns.
+           -6 mylocalservice.domain.com \       # Update this IPv6 entry within ydns,
+           -t localserver02.lan                 # by discovering and using the Public IPv6 Address of this local host.
+```

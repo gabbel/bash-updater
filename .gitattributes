@@ -1,0 +1,2 @@
+# Repo contains text designated for Linux, therefore text file should have LF line endings.
+* text=auto eol=lf
