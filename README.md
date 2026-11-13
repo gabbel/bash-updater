@@ -18,14 +18,8 @@ First, ensure that your host has [curl](http://curl.haxx.se) installed.
 To run this script every 15 minutes using `crontab`, add the following line to your crontab list:
 
 ```bash
-*/15 * * * * /path/to/script/updater.sh > /dev/null
+*/15 * * * * /path/to/script/updater.sh -4 myservice.mydomain.net > /dev/null
 ```
-
-Although this works on most all implementations of `crontab`, for more portability use this instead:
-
-```bash
-0,15,30,45 * * * * /path/to/script/updater.sh > /dev/null
-````
 
 **NOTE:** To gain access to the crontab list to edit and add entries, execute `crontab -e` at the terminal
 
@@ -55,7 +49,7 @@ If you like to contribute useful changes to the script, simply fork the project,
 - ip (for IPv6 and for -i); nslookup for -t
 
 ```bash
-# Within openwrt normally only curl is an addtional required package.
+# Within openwrt normally only curl is an additional required package.
 # Install from CLI using.
 apk add curl
 ```
